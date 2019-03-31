@@ -7,7 +7,7 @@ defaults write NSGlobalDomain AppleInterfaceStyle Dark;
 defaults write com.apple.Dock autohide-delay -float 0
 
 # Automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool false
 
 # Set the icon size of Dock items to 36 pixels
 defaults write com.apple.dock tilesize -int 38
@@ -29,11 +29,5 @@ defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
 # Speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -float 0.1
-
-# Disable the Launchpad gesture (pinch with thumb and three fingers)
-defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
-
-# Remove All Apps From The Dock In OS X
-defaults write com.apple.dock persistent-apps -array
 
 killall Dock
