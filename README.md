@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/gokulkrishh/dotfiles/master/logo.png" width="250" height="250"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/jgroac/dotfiles/master/logo.png" width="250" height="250"/></p>
 
 # dotfiles
 
@@ -9,7 +9,7 @@ _Your cool web development environment is just a few steps away._
 ##### 1. `Clone`
 
 ```bash
-git clone https://github.com/gokulkrishh/dotfiles.git ~/dotfiles
+git clone <https://github.com/jgroac/dotfiles> ~/dotfiles
 ```
 
 ##### 2. `Install`
@@ -27,7 +27,7 @@ npm config set init.author.name "Your name"
 npm config set init.author.email "Your email id"
 ```
 
-<img src="https://raw.githubusercontent.com/gokulkrishh/dotfiles/master/terminal.png" alt="screenshot"/>
+<img src="https://raw.githubusercontent.com/jgroac/dotfiles/master/terminal.png" alt="screenshot"/>
 
 ### 💅 Features
 
