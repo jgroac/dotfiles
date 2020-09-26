@@ -6,10 +6,10 @@ export CLICOLOR=true
 
 ## Set name of the theme to load.
 ## Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="dracula"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 ## oh-my-zsh plugins
-plugins=(git zsh-nvm npm git-it-on)
+plugins=(git zsh-nvm npm zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
@@ -53,6 +53,32 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 ## Unset manpath so we can inherit from /etc/manpath via the `manpath`
 unset MANPATH ## delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+# Tweak powerline theme config
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator node_version battery)
+
+## Tweak username (clean username)
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    #prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+  fi
+}
+
+## To set bat theme
+export BAT_THEME="night-owlish"
+
+## vscode
+function code {
+    if [[ $# = 0 ]]
+    then
+        open -a "Visual Studio Code"
+    else
+        local argPath="$1"
+        [[ $1 = /* ]] && argPath="$1" || argPath="$PWD/${1#./}"
+        open -a "Visual Studio Code" "$argPath"
+    fi
+}
 
 ## Adding z script path for easy cding...
 ## Source: https://github.com/rupa/z
