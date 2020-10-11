@@ -66,7 +66,6 @@ else
   e_note "Check .aliases file for more details."
   cp oh-my-zsh/aliases ~/.aliases                                        ## Copy aliases
   cp oh-my-zsh/zshrc ~/.zshrc                                            ## Copy zshrc configs
-  cp oh-my-zsh/dracula.zsh-theme ~/.oh-my-zsh/themes/dracula.zsh-theme   ## Copy custom dracula theme
   cp oh-my-zsh/z.sh ~/z.sh                                               ## Copy z.sh autocompletion file
   git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k ## zsh theme
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ## Copy syntax higlighting pluging
@@ -118,15 +117,15 @@ echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
 
 
-## My touchbar. My rules
-if ! type mtmr > /dev/null
+# My touchbar. My rules
+if ! whichapp 'MTMR' &>/dev/null;
 then
   e_header "Install My touchbar. My rules.."
   brew cask install mtmr
   cp -rf osx/items.json ~/Library/Application\ Support/MTMR/items.json
 fi
 
-## Serve static files
+# Serve static files
 if ! type serve > /dev/null
 then
   e_header "Install serve.."
@@ -160,7 +159,7 @@ fi
 
 
 ## Ripgrep install
-if ! type ripgrep > /dev/null
+if ! type rg > /dev/null
 then
   e_header "Install ripgrep.."
   brew install ripgrep
@@ -171,11 +170,24 @@ fi
 if ! type delta > /dev/null
 then
   e_header "Install git-delta.."
-  brew install git-delta
-  git config --global core.pager="delta --plus-color=\"#012800\" --minus-color=\"#340001\" --theme='night-owlish'"
-  git config --global interactive.diffFilter="delta --color-only"
+  # brew install git-delta
+  git config --global core.pager "delta --plus-color=\"#012800\" --minus-color=\"#340001\" --theme=\"night-owlish\""
+  git config --global interactive.diffFilter "delta --color-only"
 fi
 
+## Vscode install
+if ! whichapp 'Visual Studio Code' &>/dev/null;
+then
+  e_header "Install Visual Studio Code"
+  brew cask install visual-studio-code
+fi
+
+## Sublime install
+if ! whichapp 'Sublime Text' &>/dev/null;
+then
+  e_header "Install Sublime Text"
+  brew cask install sublime-text
+fi
 
 echo "Generating an RSA token for GitHub"
 ssh-keygen -t rsa -b 4096 -C "jg.roac@gmail.com"
