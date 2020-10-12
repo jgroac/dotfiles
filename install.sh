@@ -189,6 +189,15 @@ then
   brew cask install sublime-text
 fi
 
+#Install powerline fonts
+e_header "Install powerline fonts..."
+git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts
+bash ./install.sh
+cd ..
+rm -rf fonts
+
+
 echo "Generating an RSA token for GitHub"
 ssh-keygen -t rsa -b 4096 -C "jg.roac@gmail.com"
 echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_rsa" | tee ~/.ssh/config
