@@ -1,0 +1,30 @@
+# Shorthands
+alias c='clear'
+alias cl='clear'
+alias cls='clear'
+alias ckear='clear'
+alias cear='clear'
+alias clea='clear'
+alias exot='exit'
+alias exi='exit'
+alias l='ls'
+alias la='ls -a'
+alias l='ls'
+
+
+# Copy paste
+alias copy='pbcopy'
+
+# Server
+alias server='python -m SimpleHTTPServer'
+
+
+### Get ip to check if vpn is on
+alias myip="curl ipv4.icanhazip.com"
+alias myip6="curl icanhazip.com"
+
+# Finder Hide/Show hidden files
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+
+
