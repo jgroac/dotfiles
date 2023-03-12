@@ -9,7 +9,7 @@ source macos/defaults.sh
 ###############################################################################
 
 to_header "Git config"
-cp gitignore ~/.gitignore_global  ## Adding .gitignore global
+cp .gitignore ~/.gitignore_global  ## Adding .gitignore global
 git config --global core.excludesfile "${HOME}/.gitignore_global"
 
 ask "${blue} Git email:"

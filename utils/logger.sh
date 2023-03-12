@@ -11,6 +11,10 @@ tan=$(tput setaf 3)
 blue=$(tput setaf 38)
 
 # Headers and  Logging
+ask() {
+  printf "\n${bold}$@${reset}"
+}
+
 to_header() {
   printf "\n${bold}${purple}==========  %s  ==========${reset}\n" "$@"
 }
