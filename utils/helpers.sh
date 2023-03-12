@@ -3,13 +3,13 @@
 ## To check input is empty or not
 is_empty() {
   if [ $# -eq  0 ];then
-    return 1;;
+    return 1;
   fi
-    return 0;;
+    return 0;
 }
 
 ## Check if app installed
-isInstalled() {
+is_installed() {
   local appNameOrBundleId=$1 isAppName=0 bundleId
   # Determine whether an app *name* or *bundle ID* was specified.
   [[ $appNameOrBundleId =~ \.[aA][pP][pP]$ || $appNameOrBundleId =~ ^[^.]+$ ]] && isAppName=1

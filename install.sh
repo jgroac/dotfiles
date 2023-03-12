@@ -12,33 +12,32 @@ source utils/helpers.sh
 to_header "Git config"
 
 ask "${blue} Do you want to config git (y/n):"
-gitConfig=$(prompt_confirm)
+set_git_config="$(prompt_confirm)"
 
 cp .gitignore ~/.gitignore_global  ## Adding .gitignore global
 git config --global core.excludesfile "${HOME}/.gitignore_global"
 
-if [[ gitConfig -eq 1 ]]; then
+if [[ set_git_config -eq 1 ]]; then
+
   ask "${blue} Git email:"
   read -r emailId
-fi
+  if is_empty $emailId; then
+    git config --global user.email "$emailId" ## Git Email Id
+    to_success "Email is set"
+  else
+    to_warning "Not set"
+  fi
 
-if is_empty $emailId; then
-  git config --global user.email "$emailId" ## Git Email Id
-  to_success "Email is set"
-else
-  to_warning "Not set"
-fi
-
-if [[ gitConfig -eq 1 ]]; then
   ask "${blue} Git username:"
   read -r userName
-fi
-
-if is_empty $userName; then
-  git config --global user.name "$userName" ## Git Username
-  to_success "Username is set"
+  if is_empty $userName; then
+    git config --global user.name "$userName" ## Git Username
+    to_success "Username is set"
+  else
+    to_warning "Not set"
+  fi
 else
-  to_warning "Not set"
+  to_warning "Skipping git setup..."
 fi
 
 
@@ -58,13 +57,13 @@ fi
 # Terminal                                                                    #
 ###############################################################################
 
-if ! isInstalled 'iTerm' &>/dev/null;
+if ! is_installed 'iTerm' &>/dev/null;
 then
   to_header "Installing iTerm..."
   brew install --cask iterm2
 fi
 
-if ! isInstalled 'Alacritty' &>/dev/null;
+if ! is_installed 'Alacritty' &>/dev/null;
 then
   to_header "Installing Alacritty...."
   brew install --cask alacritty
@@ -177,7 +176,7 @@ then
 fi
 
 ## Vscode
-if ! isInstalled 'Visual Studio Code' &>/dev/null;
+if ! is_installed 'Visual Studio Code' &>/dev/null;
 then
   to_header "Installing Visual Studio Code..."
   brew cask install visual-studio-code
@@ -185,35 +184,35 @@ fi
 
 
 ## Sublime
-if ! isInstalled 'Sublime Text' &>/dev/null;
+if ! is_installed 'Sublime Text' &>/dev/null;
 then
   to_header "Installing Sublime Text..."
   brew cask install sublime-text
 fi
 
 ## Brave Browser
-if ! isInstalled 'Brave Browser' &>/dev/null;
+if ! is_installed 'Brave Browser' &>/dev/null;
 then
   to_header "Installing Brave Browser..."
   brew install --cask brave-browser
 fi
 
 ## Slack
-if ! isInstalled 'Slack' &>/dev/null;
+if ! is_installed 'Slack' &>/dev/null;
 then
   to_header "Installing Slack..."
   brew install --cask slack
 fi
 
 ## Obsidian
-if ! isInstalled 'Obsidian' &>/dev/null;
+if ! is_installed 'Obsidian' &>/dev/null;
 then
   to_header "Installing Obsidian..."
   brew install --cask obsidian
 fi
 
 ## Spotify
-if ! isInstalled 'Spotify' &>/dev/null;
+if ! is_installed 'Spotify' &>/dev/null;
 then
   to_header "Installing Spotify..."
   brew install --cask spotify
@@ -223,11 +222,14 @@ fi
 source macos/dock.sh
 
 
-to_header "Generating an ed25519 token for GitHub"
-ssh-keygen -t ed25519 -C "jg.roac@gmail.com"
-echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_rsa" | tee ~/.ssh/config
-eval "$(ssh-agent -s)"
-echo "run 'pbcopy < ~/.ssh/id_rsa.pub' and paste that into GitHub"
+## Generate ssh key
+if [[ set_git_config -eq 1 ]]; then
+  to_header "Generating an ed25519 ssh key for GitHub"
+  ssh-keygen -t ed25519 -C "jg.roac@gmail.com"
+  echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_rsa" | tee ~/.ssh/config
+  eval "$(ssh-agent -s)"
+  echo "run 'pbcopy < ~/.ssh/id_rsa.pub' and paste that into GitHub"
+fi
 
 ## Remove cloned dotfiles from system
 if [ -d ~/dotfiles ]; then

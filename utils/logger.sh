@@ -22,10 +22,12 @@ prompt_confirm() {
     read -p "" yn
     case $yn in
       [yY] )
+        echo "1";
         return 1;;
       [nN] )
+        echo "0";
         return 0;;
-      * ) return 0;;
+      * ) echo "0"; return 0;;
     esac
   done
 }
