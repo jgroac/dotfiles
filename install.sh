@@ -1,19 +1,27 @@
 #!/bin/bash
 
 source utils/logger.sh
+source utils/helpers.sh
 
-source macos/defaults.sh
+# source macos/defaults.sh
 
 ###############################################################################
 # Git config                                                                  #
 ###############################################################################
 
 to_header "Git config"
+
+ask "${blue} Do you want to config git (y/n):"
+gitConfig=$(prompt_confirm)
+
 cp .gitignore ~/.gitignore_global  ## Adding .gitignore global
 git config --global core.excludesfile "${HOME}/.gitignore_global"
 
-ask "${blue} Git email:"
-read -r emailId
+if [[ gitConfig -eq 1 ]]; then
+  ask "${blue} Git email:"
+  read -r emailId
+fi
+
 if is_empty $emailId; then
   git config --global user.email "$emailId" ## Git Email Id
   to_success "Email is set"
@@ -21,8 +29,11 @@ else
   to_warning "Not set"
 fi
 
-ask "${blue} Git username:"
-read -r userName
+if [[ gitConfig -eq 1 ]]; then
+  ask "${blue} Git username:"
+  read -r userName
+fi
+
 if is_empty $userName; then
   git config --global user.name "$userName" ## Git Username
   to_success "Username is set"
@@ -39,7 +50,7 @@ if test ! $(which brew); then
   to_header "Installing Homebrew"
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
-  e_warning "Homebrew is already installed. Skipping..."
+  to_warning "Homebrew is already installed. Skipping..."
 fi
 
 
@@ -47,13 +58,13 @@ fi
 # Terminal                                                                    #
 ###############################################################################
 
-if ! type yarn > /dev/null
+if ! isInstalled 'iTerm' &>/dev/null;
 then
   to_header "Installing iTerm..."
   brew install --cask iterm2
 fi
 
-if ! type alacritty > /dev/null
+if ! isInstalled 'Alacritty' &>/dev/null;
 then
   to_header "Installing Alacritty...."
   brew install --cask alacritty
@@ -65,29 +76,28 @@ fi
 ZSH=~/.oh-my-zsh
 
 if [ -d "$ZSH" ]; then
-  e_warning "ZSH is already installed. Skipping..."
+  to_warning "ZSH is already installed. Skipping..."
 else
   to_header "Installing ZSH..."
   curl -L http://install.ohmyz.sh | sh
 
   ## To install ZSH themes & aliases
   to_header "Copying ZSH themes & aliases..."
-  e_note "Check .aliases file for more details."
+  to_note "Check .aliases file for more details."
   cp terminal/aliases ~/.aliases
   cp terminal/zshrc ~/.zshrc
   git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k ## zsh theme
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ## Copy syntax higlighting pluging
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ## Copy autosuggestions pluging
+
+  # Install powerline fonts
+  to_header "Install powerline fonts..."
+  git clone https://github.com/powerline/fonts.git --depth=1
+  cd fonts
+  bash ./install.sh
+  cd ..
+  rm -rf fonts
 fi
-
-#Install powerline fonts
-to_header "Install powerline fonts..."
-git clone https://github.com/powerline/fonts.git --depth=1
-cd fonts
-bash ./install.sh
-cd ..
-rm -rf fonts
-
 
 ###############################################################################
 # Node                                                                        #
@@ -167,7 +177,7 @@ then
 fi
 
 ## Vscode
-if ! whichapp 'Visual Studio Code' &>/dev/null;
+if ! isInstalled 'Visual Studio Code' &>/dev/null;
 then
   to_header "Installing Visual Studio Code..."
   brew cask install visual-studio-code
@@ -175,35 +185,35 @@ fi
 
 
 ## Sublime
-if ! whichapp 'Sublime Text' &>/dev/null;
+if ! isInstalled 'Sublime Text' &>/dev/null;
 then
   to_header "Installing Sublime Text..."
   brew cask install sublime-text
 fi
 
 ## Brave Browser
-if ! whichapp 'Brave Browser' &>/dev/null;
+if ! isInstalled 'Brave Browser' &>/dev/null;
 then
   to_header "Installing Brave Browser..."
   brew install --cask brave-browser
 fi
 
 ## Slack
-if ! whichapp 'Slack' &>/dev/null;
+if ! isInstalled 'Slack' &>/dev/null;
 then
   to_header "Installing Slack..."
   brew install --cask slack
 fi
 
 ## Obsidian
-if ! whichapp 'Obsidian' &>/dev/null;
+if ! isInstalled 'Obsidian' &>/dev/null;
 then
   to_header "Installing Obsidian..."
   brew install --cask obsidian
 fi
 
 ## Spotify
-if ! whichapp 'Spotify' &>/dev/null;
+if ! isInstalled 'Spotify' &>/dev/null;
 then
   to_header "Installing Spotify..."
   brew install --cask spotify

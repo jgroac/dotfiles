@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #Set Colors
 
 bold=$(tput bold)
@@ -13,6 +15,19 @@ blue=$(tput setaf 38)
 # Headers and  Logging
 ask() {
   printf "\n${bold}$@${reset}"
+}
+
+prompt_confirm() {
+  while true; do
+    read -p "" yn
+    case $yn in
+      [yY] )
+        return 1;;
+      [nN] )
+        return 0;;
+      * ) return 0;;
+    esac
+  done
 }
 
 to_header() {
