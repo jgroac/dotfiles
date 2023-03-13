@@ -5,6 +5,19 @@ source utils/helpers.sh
 
 # source macos/defaults.sh
 
+
+to_bold "${tan}┌──────────────────────────────────────────────────────────────┐
+|  Welcome!!                                                   |
+|                                                              |
+| This will overwrite your system configuration.               |
+| Do you want to proceed (y/N)?                                |
+└──────────────────────────────────────────────────────────────┘"
+
+if prompt_confirm; then
+  to_error "Aborting..."
+  exit 1;
+fi
+
 ###############################################################################
 # Git config                                                                  #
 ###############################################################################
