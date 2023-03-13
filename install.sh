@@ -1,10 +1,5 @@
 #!/bin/bash
 
-source utils/logger.sh
-source utils/helpers.sh
-source macos/defaults.sh
-
-
 to_bold "${tan}┌──────────────────────────────────────────────────────────────┐
 |  Welcome!!                                                   |
 |                                                              |
@@ -16,6 +11,10 @@ if prompt_confirm; then
   to_error "Aborting..."
   exit 1;
 fi
+
+source utils/logger.sh
+source utils/helpers.sh
+source macos/defaults.sh
 
 ###############################################################################
 # Git config                                                                  #
