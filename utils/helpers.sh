@@ -1,5 +1,12 @@
 #!/bin/bash
 
+## Install macos disk image
+installPackage() {
+  VOLUME=`hdiutil attach $1 | df | sed -En 's~.* (/Volumes/.+)$~\1~p'`
+  cp -rf "$VOLUME"/*.app /Applications
+  hdiutil detach "$VOLUME"
+}
+
 ## To check input is empty or not
 is_empty() {
   if [ $# -eq  0 ];then

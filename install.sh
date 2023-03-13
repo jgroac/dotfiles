@@ -292,6 +292,16 @@ then
   brew install --cask brave-browser
 fi
 
+## Firefox Dev Edition
+if ! is_installed 'Firefox Developer Edition' &>/dev/null;
+then
+  to_header "Installing Firefox Dev Edition..."
+  to_arrow "Downloading..."
+  curl -L -o firefox-dev.dmg "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=osx&lang=en-GB"
+  to_arrow "Installing..."
+  installPackage firefox-dev.dmg
+fi
+
 ## Slack
 if ! is_installed 'Slack' &>/dev/null;
 then
