@@ -33,9 +33,9 @@ git config --global core.excludesfile "${HOME}/.gitignore_global"
 if [[ set_git_config -eq 1 ]]; then
 
   ask "${blue} Git email:"
-  read -r emailId
-  if is_empty $emailId; then
-    git config --global user.email "$emailId" ## Git Email Id
+  read -r userEmail
+  if is_empty $userEmail; then
+    git config --global user.email "$userEmail"
     to_success "Email is set"
   else
     to_warning "Not set"
@@ -44,7 +44,7 @@ if [[ set_git_config -eq 1 ]]; then
   ask "${blue} Git username:"
   read -r userName
   if is_empty $userName; then
-    git config --global user.name "$userName" ## Git Username
+    git config --global user.name "$userName"
     to_success "Username is set"
   else
     to_warning "Not set"
@@ -63,6 +63,24 @@ if test ! $(which brew); then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
   to_warning "Homebrew is already installed. Skipping..."
+fi
+
+###############################################################################
+# System                                                                      #
+###############################################################################
+
+if test ! $(which dockutil); then
+  to_header "Installing dockutil..."
+  brew install dockutil
+else
+  to_warning "dockutil is already installed. Skipping..."
+fi
+
+if test ! $(which coreutils); then
+  to_header "Installing coreutils..."
+  brew install coreutils
+else
+  to_warning "coreutils is already installed. Skipping..."
 fi
 
 
@@ -112,7 +130,7 @@ else
 fi
 
 ###############################################################################
-# Node                                                                        #
+# Languages                                                                   #
 ###############################################################################
 
 ## Install fnm Nodejs version manager
@@ -126,7 +144,6 @@ fi
 echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
 
-
 ## Yarn install
 if ! type yarn > /dev/null
 then
@@ -134,9 +151,15 @@ then
   npm install --global yarn
 fi
 
+## Go lang
+if ! type go > /dev/null
+then
+  to_header "Installing go..."
+  brew install go
+fi
 
 ###############################################################################
-# Tools                                                                       #
+# Commandline Tools                                                           #
 ###############################################################################
 
 ## Install ctop
@@ -170,7 +193,6 @@ then
   bat cache --build
 fi
 
-
 ## Ripgrep
 if ! type rg > /dev/null
 then
@@ -178,6 +200,54 @@ then
   brew install ripgrep
 fi
 
+## Commandline fuzzy finder
+if ! type fzf > /dev/null
+then
+  to_header "Installing fzf..."
+  brew install fzf
+fi
+
+## Json jq
+if ! type jq > /dev/null
+then
+  to_header "Installing jq..."
+  brew install jq
+fi
+
+## Github CLI
+if ! type jq > /dev/null
+then
+  to_header "Installing Github CLI..."
+  brew install gh
+fi
+
+## Croc to send file securely
+if ! type croc > /dev/null
+then
+  to_header "Installing croc..."
+  brew install croc
+fi
+
+## User-friendly cURL
+if ! type httpie > /dev/null
+then
+  to_header "Installing httpie..."
+  brew install httpie
+fi
+
+## Better cd
+if ! type httpie > /dev/null
+then
+  to_header "Installing z..."
+  brew install zoxide
+fi
+
+## Tree
+if ! type tree > /dev/null
+then
+  to_header "Installing tree..."
+  brew install tree
+fi
 
 ## git-delta
 if ! type delta > /dev/null
@@ -187,6 +257,18 @@ then
   git config --global core.pager "delta --plus-color=\"#012800\" --minus-color=\"#340001\" --theme=\"night-owlish\""
   git config --global interactive.diffFilter "delta --color-only"
 fi
+
+
+## Tree
+if ! type tree > /dev/null
+then
+  to_header "Installing tree..."
+  brew install tree
+fi
+
+###############################################################################
+# Apps                                                                        #
+###############################################################################
 
 ## Vscode
 if ! is_installed 'Visual Studio Code' &>/dev/null;
@@ -249,4 +331,4 @@ if [ -d ~/dotfiles ]; then
   sudo rm -R ~/dotfiles
 fi
 
-echo "🍺  Thats all, Done. Please restart for some changes to take effect"
+echo "🚀  Thats all, Done. Please restart for some changes to take effect"
