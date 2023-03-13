@@ -146,8 +146,22 @@ echo "npm --version: $(npm --version)"
 ## Yarn install
 if ! type yarn > /dev/null
 then
-  to_header "Install yarn..."
+  to_header "Installing yarn..."
   npm install --global yarn
+fi
+
+## Fast speedtest cli
+if ! type fast > /dev/null
+then
+  to_header "Installing fast..."
+  npm install --global fast-cli
+fi
+
+## tldr for commands
+if ! type tldr > /dev/null
+then
+  to_header "Installing tldr..."
+  npm install --global tldr
 fi
 
 ## Go lang
@@ -332,6 +346,20 @@ if ! is_installed 'MacPass' &>/dev/null;
 then
   to_header "Installing MacPass..."
   brew install --cask macpass
+fi
+
+## Dropbox
+if ! is_installed 'Dropbox' &>/dev/null;
+then
+  to_header "Installing Dropbox..."
+  brew install --cask dropbox
+fi
+
+## Docker
+if ! is_installed 'Docker' &>/dev/null;
+then
+  to_header "Installing Docker..."
+  brew install --cask docker
 fi
 
 ## Update apps in dock
