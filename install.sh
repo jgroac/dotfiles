@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source utils/logger.sh
+source utils/helpers.sh
+
 to_bold "${tan}┌──────────────────────────────────────────────────────────────┐
 |  Welcome!!                                                   |
 |                                                              |
@@ -12,8 +15,6 @@ if prompt_confirm; then
   exit 1;
 fi
 
-source utils/logger.sh
-source utils/helpers.sh
 source macos/defaults.sh
 
 ###############################################################################
