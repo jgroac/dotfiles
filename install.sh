@@ -2,8 +2,7 @@
 
 source utils/logger.sh
 source utils/helpers.sh
-
-# source macos/defaults.sh
+source macos/defaults.sh
 
 
 to_bold "${tan}┌──────────────────────────────────────────────────────────────┐
