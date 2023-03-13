@@ -26,10 +26,9 @@ to_header "Git config"
 ask "${blue} Do you want to config git (y/n):"
 set_git_config="$(prompt_confirm)"
 
-cp .gitignore ~/.gitignore_global  ## Adding .gitignore global
-git config --global core.excludesfile "${HOME}/.gitignore_global"
-
 if [[ set_git_config -eq 1 ]]; then
+  cp .gitignore ~/.gitignore_global  ## Adding .gitignore global
+  git config --global core.excludesfile "${HOME}/.gitignore_global"
 
   ask "${blue} Git email:"
   read -r userEmail
@@ -263,19 +262,32 @@ fi
 # Apps                                                                        #
 ###############################################################################
 
+## Clipboard manager
+if ! is_installed 'Maccy' &>/dev/null;
+then
+  to_header "Installing Maccy..."
+  brew install --cask maccy
+fi
+
+## Window snapping
+if ! is_installed 'Rectangle' &>/dev/null;
+then
+  to_header "Installing Rectangle..."
+  brew install --cask rectangle
+fi
+
 ## Vscode
 if ! is_installed 'Visual Studio Code' &>/dev/null;
 then
   to_header "Installing Visual Studio Code..."
-  brew cask install visual-studio-code
+  brew install --cask visual-studio-code
 fi
-
 
 ## Sublime
 if ! is_installed 'Sublime Text' &>/dev/null;
 then
   to_header "Installing Sublime Text..."
-  brew cask install sublime-text
+  brew install --cask sublime-text
 fi
 
 ## Brave Browser
@@ -288,10 +300,9 @@ fi
 ## Firefox Dev Edition
 if ! is_installed 'Firefox Developer Edition' &>/dev/null;
 then
-  to_header "Installing Firefox Dev Edition..."
-  to_arrow "Downloading..."
+  to_header "Downloading Firefox Dev Edition..."
   curl -L -o firefox-dev.dmg "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=osx&lang=en-GB"
-  to_arrow "Installing..."
+  to_header "Installing Firefox Dev Edition..."
   installPackage firefox-dev.dmg
 fi
 
@@ -316,6 +327,13 @@ then
   brew install --cask spotify
 fi
 
+## MacPass
+if ! is_installed 'MacPass' &>/dev/null;
+then
+  to_header "Installing MacPass..."
+  brew install --cask macpass
+fi
+
 ## Update apps in dock
 source macos/dock.sh
 
@@ -323,10 +341,10 @@ source macos/dock.sh
 ## Generate ssh key
 if [[ set_git_config -eq 1 ]]; then
   to_header "Generating an ed25519 ssh key for GitHub"
-  ssh-keygen -t ed25519 -C "jg.roac@gmail.com"
-  echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_rsa" | tee ~/.ssh/config
+  ssh-keygen -t ed25519 -C $userEmail
+  echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed25519" | tee ~/.ssh/config
   eval "$(ssh-agent -s)"
-  echo "run 'pbcopy < ~/.ssh/id_rsa.pub' and paste that into GitHub"
+  echo "run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into GitHub"
 fi
 
 ## Remove cloned dotfiles from system
