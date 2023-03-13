@@ -70,7 +70,8 @@ fi
 
 if test ! $(which dockutil); then
   to_header "Installing dockutil..."
-  brew install dockutil
+  brew tap lotyp/homebrew-formulae
+  brew install lotyp/formulae/dockutil
 else
   to_warning "dockutil is already installed. Skipping..."
 fi
