@@ -113,8 +113,8 @@ else
   ## To install ZSH themes & aliases
   to_header "Copying ZSH themes & aliases..."
   to_note "Check .aliases file for more details."
-  cp terminal/aliases ~/.aliases
-  cp terminal/zshrc ~/.zshrc
+  cp terminal/.aliases ~/.aliases
+  cp terminal/.zshrc ~/.zshrc
   git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k ## zsh theme
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ## Copy syntax higlighting pluging
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ## Copy autosuggestions pluging
@@ -137,9 +137,13 @@ if ! type fnm > /dev/null
 then
   to_header "Installing Nodejs version manager..."
   curl -fsSL https://fnm.vercel.app/install | bash
+  
+  fnm install 18.16.0
+  fnm default 18.16.0
 fi
 
 ## Print installed node, npm version
+eval "$(fnm env --use-on-cd)"
 echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
 
@@ -266,7 +270,7 @@ fi
 if ! type delta > /dev/null
 then
   to_header "Installing git-delta..."
-  # brew install git-delta
+  brew install 'git-delta'
   git config --global core.pager "delta --plus-color=\"#012800\" --minus-color=\"#340001\" --theme=\"night-owlish\""
   git config --global interactive.diffFilter "delta --color-only"
 fi

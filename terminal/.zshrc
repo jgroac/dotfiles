@@ -3,7 +3,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jose/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set theme to load
 #ZSH_THEME="agnoster"
@@ -31,7 +31,7 @@ function code {
 }
 
 # Syntax highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #set bat theme env variable
 export BAT_THEME="night-owlish"
@@ -52,3 +52,9 @@ export GOPATH=$HOME/go
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
+
+## FNM Node
+eval "$(fnm env --use-on-cd)"
+
+## Thefuck
+eval $(thefuck --alias)
