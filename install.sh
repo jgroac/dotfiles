@@ -271,7 +271,7 @@ if ! type delta > /dev/null
 then
   to_header "Installing git-delta..."
   brew install 'git-delta'
-  git config --global core.pager "delta --plus-color=\"#012800\" --minus-color=\"#340001\" --theme=\"night-owlish\""
+  git config --global core.pager "delta --syntax-theme=\"night-owlish\""
   git config --global interactive.diffFilter "delta --color-only"
 fi
 
