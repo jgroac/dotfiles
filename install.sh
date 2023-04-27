@@ -137,7 +137,7 @@ if ! type fnm > /dev/null
 then
   to_header "Installing Nodejs version manager..."
   curl -fsSL https://fnm.vercel.app/install | bash
-  
+
   fnm install 18.16.0
   fnm default 18.16.0
 fi
@@ -321,7 +321,7 @@ then
   to_header "Downloading Firefox Dev Edition..."
   curl -L -o firefox-dev.dmg "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=osx&lang=en-GB"
   to_header "Installing Firefox Dev Edition..."
-  installPackage firefox-dev.dmg
+  install_dmg firefox-dev.dmg
 fi
 
 ## Slack

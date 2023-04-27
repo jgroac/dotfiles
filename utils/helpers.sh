@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Install macos disk image
-installPackage() {
+install_dmg() {
   VOLUME=`hdiutil attach $1 | df | sed -En 's~.* (/Volumes/.+)$~\1~p'`
   cp -rf "$VOLUME"/*.app /Applications
   hdiutil detach "$VOLUME"
