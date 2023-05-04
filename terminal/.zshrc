@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set theme to load
 #ZSH_THEME="agnoster"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Plugins to load
 plugins=(git zsh-autosuggestions)
