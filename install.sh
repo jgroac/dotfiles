@@ -115,6 +115,7 @@ else
   to_note "Check .aliases file for more details."
   cp terminal/.aliases ~/.aliases
   cp terminal/.zshrc ~/.zshrc
+  cp terminal/.p10k.zsh ~/.p10k.zsh
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k ## zsh theme
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ## Copy syntax higlighting pluging
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ## Copy autosuggestions pluging
