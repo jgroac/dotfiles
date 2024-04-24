@@ -317,6 +317,13 @@ then
   brew install --cask sublime-text
 fi
 
+## Sublime
+if ! is_installed 'Zed' &>/dev/null;
+then
+  to_header "Installing Zed..."
+  brew install --cask zed
+fi
+
 ## Brave Browser
 if ! is_installed 'Brave Browser' &>/dev/null;
 then
