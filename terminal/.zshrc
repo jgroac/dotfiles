@@ -63,6 +63,11 @@ eval "$(fnm env --use-on-cd)"
 eval $(thefuck --alias)
 
 
+## Uncomment to use TestContainer with Rancher Desktop -> https://java.testcontainers.org/supported_docker_environment/
+#export DOCKER_HOST=unix://$HOME/.rd/docker.sock
+#export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+#export TESTCONTAINERS_HOST_OVERRIDE=$(rdctl shell ip a show vznat | awk '/inet / {sub("/.*",""); print $2}')
+
 # Powerlevel10k theme
 source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 
