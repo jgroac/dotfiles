@@ -148,11 +148,11 @@ eval "$(fnm env --use-on-cd)"
 echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
 
-## Yarn install
-if ! type yarn > /dev/null
+## Pnpm install
+if ! type pnpm > /dev/null
 then
-  to_header "Installing yarn..."
-  npm install --global yarn
+  to_header "Installing pnpm..."
+  wget -qO- https://get.pnpm.io/install.sh | sh -
 fi
 
 ## Fast speedtest cli
