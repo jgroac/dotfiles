@@ -176,6 +176,14 @@ then
   brew install go
 fi
 
+## SCC count code lines
+if ! type scc > /dev/null
+then
+  to_header "Installing scc..."
+  brew install scc
+fi
+
+
 ###############################################################################
 # Commandline Tools                                                           #
 ###############################################################################
