@@ -139,8 +139,8 @@ then
   to_header "Installing Nodejs version manager..."
   curl -fsSL https://fnm.vercel.app/install | bash
 
-  fnm install 18.16.0
-  fnm default 18.16.0
+  fnm install 20.12.2
+  fnm default 20.12.2
 fi
 
 ## Print installed node, npm version
