@@ -317,7 +317,7 @@ then
   brew install --cask sublime-text
 fi
 
-## Sublime
+## Zed
 if ! is_installed 'Zed' &>/dev/null;
 then
   to_header "Installing Zed..."
