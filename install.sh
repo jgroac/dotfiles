@@ -152,7 +152,7 @@ echo "npm --version: $(npm --version)"
 if ! type pnpm > /dev/null
 then
   to_header "Installing pnpm..."
-  wget -qO- https://get.pnpm.io/install.sh | sh -
+  curl -fsSL https://get.pnpm.io/install.sh | sh -
 fi
 
 ## Fast speedtest cli
