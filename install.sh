@@ -87,16 +87,16 @@ fi
 # Terminal                                                                    #
 ###############################################################################
 
+if ! is_installed 'Ghostty' &>/dev/null;
+then
+  to_header "Installing Ghostty...."
+  brew install --cask ghostty
+fi
+
 if ! is_installed 'iTerm' &>/dev/null;
 then
   to_header "Installing iTerm..."
   brew install --cask iterm2
-fi
-
-if ! is_installed 'Alacritty' &>/dev/null;
-then
-  to_header "Installing Alacritty...."
-  brew install --cask alacritty
 fi
 
 ###############################################################################
@@ -139,8 +139,8 @@ then
   to_header "Installing Nodejs version manager..."
   curl -fsSL https://fnm.vercel.app/install | bash
 
-  fnm install 20.12.2
-  fnm default 20.12.2
+  fnm install 22.14.0
+  fnm default 22.14.0
 fi
 
 ## Print installed node, npm version
@@ -262,7 +262,7 @@ then
 fi
 
 ## Better cd
-if ! type httpie > /dev/null
+if ! type z > /dev/null
 then
   to_header "Installing z..."
   brew install zoxide
@@ -324,6 +324,13 @@ then
   brew install --cask zed
 fi
 
+## Arc
+if ! is_installed 'Arc' &>/dev/null;
+then
+  to_header "Installing Arc Browser..."
+  brew install --cask arc
+fi
+
 ## Brave Browser
 if ! is_installed 'Brave Browser' &>/dev/null;
 then
@@ -334,10 +341,7 @@ fi
 ## Firefox Dev Edition
 if ! is_installed 'Firefox Developer Edition' &>/dev/null;
 then
-  to_header "Downloading Firefox Dev Edition..."
-  curl -L -o firefox-dev.dmg "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=osx&lang=en-GB"
-  to_header "Installing Firefox Dev Edition..."
-  install_dmg firefox-dev.dmg
+  brew install --cask firefox@developer-edition
 fi
 
 ## Slack
@@ -382,9 +386,15 @@ then
   brew install --cask docker
 fi
 
+# TablePlus
+if ! is_installed 'TablePlus' &>/dev/null;
+then
+  to_header "Installing TablePlus..."
+  brew install --cask tableplus
+fi
+
 ## Update apps in dock
 source macos/dock.sh
-
 
 ## Generate ssh key
 if [[ set_git_config -eq 1 ]]; then
@@ -392,6 +402,7 @@ if [[ set_git_config -eq 1 ]]; then
   ssh-keygen -t ed25519 -C $userEmail
   echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_ed25519" | tee ~/.ssh/config
   eval "$(ssh-agent -s)"
+  ssh-add --apple-use-keychain ~/.ssh/id_ed25519
   echo "run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into GitHub"
 fi
 

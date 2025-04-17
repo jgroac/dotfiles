@@ -1,5 +1,12 @@
+source utils/logger.sh
+
+# Prompt for hostname, default to "Orion" if none provided
+ask "${blue}Enter hostname [Orion]: ${reset}"
+read -r hostname
+HOSTNAME=${hostname:-Orion}
+
 HOSTNAME="Orion"
-LANGUAGES=(en nl)
+LANGUAGES=(en-GB)
 LOCALE="en_GB@currency=GBP"
 MEASUREMENT_UNITS="Centimeters"
 SCREENSHOTS_FOLDER="${HOME}/Screenshots"
