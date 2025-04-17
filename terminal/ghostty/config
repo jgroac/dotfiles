@@ -1,0 +1,36 @@
+# Main theme colors
+background = #002B36
+foreground = #ECEFF1
+cursor-color = #ECEFF1
+selection-background = #607D8B
+selection-foreground = #ECEFF1
+
+# Fonts
+font-family = Menlo
+font-size = 14
+font-thicken = true
+adjust-cursor-thickness = 1
+
+# Additional Paletter
+palette = 0=#546E7A
+palette = 1=#FF5252
+palette = 2=#69F0AE
+palette = 3=#FFD740
+palette = 4=#40C4FF
+palette = 5=#FF4081
+palette = 6=#64FFDA
+palette = 7=#FFFFFF
+palette = 8=#B0BEC5
+palette = 9=#FF8A80
+palette = 10=#B9F6CA
+palette = 11=#FFE57F
+palette = 12=#80D8FF
+palette = 13=#FF80AB
+palette = 14=#A7FFEB
+palette = 15=#FFFFFF
+
+# Icon
+macos-icon = chalkboard
+
+# Shell
+shell-integration = zsh
