@@ -91,6 +91,14 @@ if ! is_installed 'Ghostty' &>/dev/null;
 then
   to_header "Installing Ghostty...."
   brew install --cask ghostty
+
+  # Updates ghostty config
+  ghostty_config_src="./terminal/ghostty/config"
+  ghostty_config_dir="$HOME/.config/ghostty"
+  ghostty_config_target="$ghostty_config_dir/config"
+  echo "Copying Ghostty config to $config_target"
+  mkdir -p "$ghostty_config_dir"
+  cp "$ghostty_config_src" "$ghostty_config_target"
 fi
 
 if ! is_installed 'iTerm' &>/dev/null;
@@ -262,7 +270,7 @@ then
 fi
 
 ## Better cd
-if ! type z > /dev/null
+if ! type zoxide > /dev/null
 then
   to_header "Installing z..."
   brew install zoxide
